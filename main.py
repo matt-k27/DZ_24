@@ -2,12 +2,19 @@ from inspect import isgenerator
 
 print('DZ24')
 
-
 def prime_generator(end):
-    for number in range(2, end+1):
-        if ((number == 2 or number == 3 or number == 5 or number == 7) or
-                (number % 2 != 0 and number % 3 != 0 and number % 5 != 0 and number % 7 != 0)):
-            yield number
+    seed = [True] * (end + 1)
+    for i in range(2, end + 1):
+        if seed[i]:
+            yield i
+            for j in range(i * i, end + 1, i):
+                seed[j] = False
+
+# def prime_generator(end):
+#     for number in range(2, end+1):
+#         if ((number == 2 or number == 3 or number == 5 or number == 7) or
+#                 (number % 2 != 0 and number % 3 != 0 and number % 5 != 0 and number % 7 != 0)):
+#             yield number
 
 
 gen = prime_generator(1)
